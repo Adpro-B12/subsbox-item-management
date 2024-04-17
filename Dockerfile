@@ -26,7 +26,7 @@ WORKDIR /app
 
 RUN ls -al
 
-COPY ./build/libs/subsbox_item_management-0.0.1-SNAPSHOT.jar /app
+COPY ./subsbox_item_management-0.0.1-SNAPSHOT.jar /app
 
 EXPOSE 8080
 
