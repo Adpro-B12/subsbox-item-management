@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -102,12 +103,13 @@ public class SubscriptionBoxControllerTest {
     @Test
     public void testViewSubscriptionBox() throws Exception {
         SubscriptionBox subscriptionBox = new SubscriptionBox();
-        subscriptionBox.setId(UUID.randomUUID().toString());
+        String id = UUID.randomUUID().toString();
+        subscriptionBox.setId(id);
         subscriptionBox.setName("Test Subscription Box");
         subscriptionBox.setPrice(100000);
         // subscriptionBox.setRating(5);
 
-        given(subscriptionBoxService.viewDetails(any(String.class))).willReturn(subscriptionBox.toString());
+        given(subscriptionBoxService.viewDetails(id)).willReturn(subscriptionBox.toString());
 
         mockMvc.perform(get("/subscription-box/view/" + subscriptionBox.getId()))
                 .andExpect(status().isOk())

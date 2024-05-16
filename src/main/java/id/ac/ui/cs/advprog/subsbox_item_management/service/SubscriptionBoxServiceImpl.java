@@ -1,8 +1,11 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.service;
 
 import java.util.List;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
@@ -12,39 +15,49 @@ import id.ac.ui.cs.advprog.subsbox_item_management.repository.SubscriptionBoxRep
 public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
     @Autowired
     private SubscriptionBoxRepository subscriptionBoxRepository;
-
+    
     @Override
-    public SubscriptionBox addBox(SubscriptionBox box) {
-        return subscriptionBoxRepository.addBox(box);
+    public SubscriptionBox addBox(SubscriptionBox box){
+        return subscriptionBoxRepository.save(box);
     }
 
     @Override
     public SubscriptionBox deleteBox(String id) {
-        return subscriptionBoxRepository.deleteBox(id);
+        subscriptionBoxRepository.deleteById(id);
+        return subscriptionBoxRepository.findById(id).orElse(null);
     }
 
     @Override
     public SubscriptionBox editBox(String id, SubscriptionBox box) {
-        return subscriptionBoxRepository.editBox(id, box);
+        return subscriptionBoxRepository.findById(id).map(subscriptionBox -> {
+            subscriptionBox.setName(box.getName());
+            subscriptionBox.setPrice(box.getPrice());
+            subscriptionBox.setType(box.getType());
+//            subscriptionBox.setItems(box.getItems());
+            return subscriptionBoxRepository.save(subscriptionBox);
+        }).orElse(null);
     }
 
     @Override
     public List<SubscriptionBox> viewAll() {
-        return subscriptionBoxRepository.viewAll();
-    }
-
-    @Override
-    public String viewDetails(String boxId) {
-        return subscriptionBoxRepository.viewDetails(boxId);
+        return subscriptionBoxRepository.findAll();
     }
 
     @Override
     public List<SubscriptionBox> filterByPrice(int price) {
-        return subscriptionBoxRepository.filterByPrice(price);
+        List<SubscriptionBox> boxes =  subscriptionBoxRepository.findAll().stream().filter(var1 -> {return var1.getPrice()==price;}).collect(Collectors.toList()) ;
+        return boxes;
     }
 
+    @Override
+    public String viewDetails(String boxId) {
+        return subscriptionBoxRepository.findById(boxId).get().getName();
+    }
+
+
+    // need Rating
     // @Override
-    // public List<SubscriptionBox> filterByRating(int rating) {
-    //     return subscriptionBoxRepository.filterByRating(rating);
+    // public CompletableFuture<List<SubscriptionBox>> getFilteredBoxesByRatingAsync(String name) {
+    //     return CompletableFuture.supplyAsync(() -> subscriptionBoxRepository.findByNameContaining(name));
     // }
 }

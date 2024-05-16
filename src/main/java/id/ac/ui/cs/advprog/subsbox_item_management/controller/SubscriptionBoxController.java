@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.concurrent.*;
 
 import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 import id.ac.ui.cs.advprog.subsbox_item_management.service.SubscriptionBoxService;
@@ -21,6 +22,11 @@ public class SubscriptionBoxController {
         return "<h1>Subscription box and Item Management sudah berhasil!</h1>";
     }
     
+    @GetMapping("/create")
+    public String createBoxPage(Model model) {
+        return createHTML;
+    }
+
     @PostMapping("/create")
     public ResponseEntity<SubscriptionBox> createSubscriptionBox(@RequestBody SubscriptionBox subscriptionBox, Model model) {
         SubscriptionBox newBox = subscriptionBoxService.addBox(subscriptionBox);

@@ -8,12 +8,19 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;
 
+import jakarta.persistence.*;
+
+
 @Getter @Setter
+@Entity
+@Table(name = "subscription_box")
 public class SubscriptionBox {
+    @Id
+            @GeneratedValue(strategy = GenerationType.UUID)
     String id;
     String name;
     String type;
     int price;
-    List<Item> items;
+//     List<Item> items;
     // Rating rating;
 }

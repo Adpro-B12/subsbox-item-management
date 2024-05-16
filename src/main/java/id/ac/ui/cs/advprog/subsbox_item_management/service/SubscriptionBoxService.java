@@ -2,6 +2,8 @@ package id.ac.ui.cs.advprog.subsbox_item_management.service;
 
 import java.util.List;
 
+import java.util.concurrent.CompletableFuture;
+
 import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 
 public interface SubscriptionBoxService {
