@@ -31,7 +31,7 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
             subscriptionBox.setName(box.getName());
             subscriptionBox.setPrice(box.getPrice());
             subscriptionBox.setType(box.getType());
-//            subscriptionBox.setItems(box.getItems());
+            subscriptionBox.setItems(box.getItems());
             return subscriptionBoxRepository.save(subscriptionBox);
         }).orElse(null);
     }

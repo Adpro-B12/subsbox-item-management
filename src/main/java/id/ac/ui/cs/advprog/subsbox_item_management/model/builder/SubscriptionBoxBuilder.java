@@ -11,9 +11,6 @@ import id.ac.ui.cs.advprog.subsbox_item_management.repository.SubscriptionBoxRep
 @Component
 public class SubscriptionBoxBuilder {
     private SubscriptionBox subscriptionBox;
-
-    @Autowired
-    private SubscriptionBoxRepository subscriptionBoxRepository;
     
     public SubscriptionBoxBuilder() {
         this.subscriptionBox = new SubscriptionBox();
@@ -34,10 +31,10 @@ public class SubscriptionBoxBuilder {
         return this;
     }
 
-//    public SubscriptionBoxBuilder setItems() {
-//        subscriptionBox.setItems(new ArrayList<>());
-//        return this;
-//    }
+    public SubscriptionBoxBuilder setItems() {
+        subscriptionBox.setItems(new ArrayList<>());
+        return this;
+    }
 
     public SubscriptionBoxBuilder setId(String id) {
         subscriptionBox.setId(id);
