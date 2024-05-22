@@ -1,11 +1,9 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.service;
 
 import java.util.List;
-import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
