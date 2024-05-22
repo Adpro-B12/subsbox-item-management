@@ -1,5 +1,7 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,4 +15,9 @@ public class Item {
     private String id;
     private String name;
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "subscription_box_id")
+    @JsonIdentityReference(alwaysAsId = true)
+    private SubscriptionBox subscriptionBox;
 }

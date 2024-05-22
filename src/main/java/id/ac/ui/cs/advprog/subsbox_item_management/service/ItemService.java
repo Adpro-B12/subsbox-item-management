@@ -9,6 +9,6 @@ public interface ItemService {
     public Item createItem(Item item);
     public List<Item> getAllItems();
     public Item getItemById(String itemId);
-    public Item editItem(Item item);
+    public Item editItem(Item item, String id);
     public Item deleteItem(Item item);
 }
