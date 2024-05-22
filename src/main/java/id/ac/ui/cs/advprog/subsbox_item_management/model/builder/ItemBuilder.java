@@ -8,7 +8,7 @@ import id.ac.ui.cs.advprog.subsbox_item_management.model.Item;
 public class ItemBuilder {
     private Item item;
     
-    private ItemBuilder() {
+    public ItemBuilder() {
         item = new Item();
     }
 
