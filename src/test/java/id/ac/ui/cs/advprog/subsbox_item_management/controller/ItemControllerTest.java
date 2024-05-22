@@ -105,9 +105,9 @@ public class ItemControllerTest {
             item.setName("Item 1");
             item.setQuantity(100000);
     
-            when(itemService.editItem(item)).thenReturn(item);
+            when(itemService.editItem(item,"1")).thenReturn(item);
     
-            assertEquals(item, itemService.editItem(item));
+            assertEquals(item, itemService.editItem(item,"1"));
         }
 
         @Test
