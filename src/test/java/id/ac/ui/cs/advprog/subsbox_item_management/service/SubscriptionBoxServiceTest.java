@@ -47,7 +47,7 @@ public class SubscriptionBoxServiceTest {
     @Test
     public void testDeleteBox() {
         subscriptionBoxService.deleteBox("1");
-        assertEquals(0, subscriptionBoxService.viewAll().get().size());
+        assertEquals(0, subscriptionBoxService.viewAll().size());
     }
 
     @Test

@@ -29,7 +29,7 @@ public class SubscriptionBoxTest {
         item2.setName("Item2");
         item2.setQuantity(2);
         items.add(item2);
-        this.subscriptionBox.setItems(items);
+        // this.subscriptionBox.setItems(items);
     }
 
     @Test
