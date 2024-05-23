@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Ignore seed.java
+id/ac/ui/cs/advprog/subsbox_item_management/seed/seed.java
