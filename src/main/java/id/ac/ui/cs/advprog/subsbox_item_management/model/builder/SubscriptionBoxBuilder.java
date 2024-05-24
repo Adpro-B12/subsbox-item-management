@@ -1,12 +1,12 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.model.builder;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 import id.ac.ui.cs.advprog.subsbox_item_management.repository.SubscriptionBoxRepository;
+
 
 @Component
 public class SubscriptionBoxBuilder {

@@ -11,6 +11,7 @@ import id.ac.ui.cs.advprog.subsbox_item_management.repository.SubscriptionBoxRep
 
 @Service
 public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
+
     @Autowired
     private SubscriptionBoxRepository subscriptionBoxRepository;
     
@@ -21,8 +22,9 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
 
     @Override
     public SubscriptionBox deleteBox(String id) {
+        SubscriptionBox box = subscriptionBoxRepository.findById(id).orElse(null);
         subscriptionBoxRepository.deleteById(id);
-        return subscriptionBoxRepository.findById(id).orElse(null);
+        return box;
     }
 
     @Override

@@ -22,8 +22,7 @@ public class ItemController {
 
     @GetMapping("/create")
     public Item createItem(@RequestParam String name) {
-        Item item = itemService.createItem(new ItemBuilder().setName(name));
-        return item;
+        return itemService.createItem(new ItemBuilder().setName(name));
     }
 
     @GetMapping("/getAll")
@@ -40,7 +39,7 @@ public class ItemController {
     public Item editItem(@RequestParam String itemId, @RequestParam int quantity) {
         Item item = itemService.getItemById(itemId);
         item.setQuantity(quantity);
-        return itemService.editItem(item);
+        return itemService.editItem(item, itemId);
     }
 
     @GetMapping("/delete")
@@ -48,5 +47,5 @@ public class ItemController {
         Item item = itemService.getItemById(itemId);
         return itemService.deleteItem(item);
     }
-    
+
 }

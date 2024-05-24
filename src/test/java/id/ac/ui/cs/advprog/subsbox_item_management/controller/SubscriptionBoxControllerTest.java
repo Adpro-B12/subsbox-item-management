@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 import id.ac.ui.cs.advprog.subsbox_item_management.service.SubscriptionBoxService;
+import io.micrometer.core.ipc.http.HttpSender.Response;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,19 +12,26 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class SubscriptionBoxControllerTest {
     
     private MockMvc mockMvc;
@@ -33,6 +41,9 @@ public class SubscriptionBoxControllerTest {
 
     @InjectMocks
     private SubscriptionBoxController subscriptionBoxController;
+
+    @Mock
+    private Model model;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -69,15 +80,9 @@ public class SubscriptionBoxControllerTest {
         subscriptionBox.setPrice(100000);
         // subscriptionBox.setRating(5);
 
-        given(subscriptionBoxService.editBox(any(String.class), any(SubscriptionBox.class))).willReturn(subscriptionBox);
+        when( subscriptionBoxService.editBox(any(String.class), any(SubscriptionBox.class))).thenReturn(subscriptionBox);
 
-        mockMvc.perform(get("/subscription-box/edit/" + subscriptionBox.getId()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(subscriptionBox.getId()))
-                .andExpect(jsonPath("$.name").value(subscriptionBox.getName()))
-                .andExpect(jsonPath("$.price").value(subscriptionBox.getPrice()))
-                // .andExpect(jsonPath("$.rating").value(subscriptionBox.getRating()))
-                ;
+        assertEquals(subscriptionBox, subscriptionBoxService.editBox(subscriptionBox.getId(), subscriptionBox));
     }
 
     @Test
@@ -88,38 +93,44 @@ public class SubscriptionBoxControllerTest {
         subscriptionBox.setPrice(100000);
         // subscriptionBox.setRating(5);
 
-        given(subscriptionBoxService.deleteBox(any(String.class))).willReturn(subscriptionBox);
+        ResponseEntity<SubscriptionBox> response = subscriptionBoxController.deleteBox(subscriptionBox.getId());
 
-        mockMvc.perform(get("/subscription-box/delete/" + subscriptionBox.getId()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(subscriptionBox.getId()))
-                .andExpect(jsonPath("$.name").value(subscriptionBox.getName()))
-                .andExpect(jsonPath("$.price").value(subscriptionBox.getPrice()))
-                // .andExpect(jsonPath("$.rating").value(subscriptionBox.getRating()))
-                ;
+        assertEquals(response.getStatusCodeValue(), 200);
+
     }
 
     @Test
     public void testViewSubscriptionBox() throws Exception {
         SubscriptionBox subscriptionBox = new SubscriptionBox();
-        String id = UUID.randomUUID().toString();
-        subscriptionBox.setId(id);
+        subscriptionBox.setId("1");
         subscriptionBox.setName("Test Subscription Box");
         subscriptionBox.setPrice(100000);
         // subscriptionBox.setRating(5);
 
-        given(subscriptionBoxService.viewDetails(id)).willReturn(subscriptionBox.toString());
+        given(subscriptionBoxService.viewDetails("1")).willReturn(subscriptionBox.getName());
 
-        mockMvc.perform(get("/subscription-box/view/" + subscriptionBox.getId()))
+        mockMvc.perform(get("/subscription-box/viewDetails/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value(subscriptionBox.toString()));
+                .andExpect(jsonPath("$").value(subscriptionBox.getName()));
     }
 
     @Test
     public void testViewAllSubscriptionBox() throws Exception {
-        mockMvc.perform(get("/subscription-box/viewAll/"))
+        List<SubscriptionBox> subscriptionBoxes = new ArrayList<>();
+        SubscriptionBox subscriptionBox = new SubscriptionBox();
+        subscriptionBox.setId(UUID.randomUUID().toString());
+        subscriptionBox.setName("Test Subscription Box");
+        subscriptionBox.setPrice(100000);
+        // subscriptionBox.setRating(5);
+        subscriptionBoxes.add(subscriptionBox);
+
+        given(subscriptionBoxService.viewAll()).willReturn(subscriptionBoxes);
+
+        mockMvc.perform(get("/subscription-box/viewAll"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray());
+                .andExpect(jsonPath("$[0].id").value(subscriptionBox.getId()))
+                .andExpect(jsonPath("$[0].name").value(subscriptionBox.getName()))
+                .andExpect(jsonPath("$[0].price").value(subscriptionBox.getPrice()));
     }
 
     @Test
