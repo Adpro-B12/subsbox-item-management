@@ -80,7 +80,7 @@ public class ItemServiceTest {
 
         when(itemRepository.save(item)).thenReturn(item);
 
-        assertEquals(item, itemService.editItem(item));
+        assertEquals(item, itemService.editItem(item, "1"));
     }
 
     @Test

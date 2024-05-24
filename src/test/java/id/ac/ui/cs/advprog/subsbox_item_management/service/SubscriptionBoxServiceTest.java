@@ -86,8 +86,6 @@ public class SubscriptionBoxServiceTest {
 
         doNothing().when(subscriptionBoxRepository).deleteById("1");
         subscriptionBoxService.deleteBox("1");
-
-        when(subscriptionBoxRepository.findAll()).thenReturn(List.of());
         assertEquals(0, subscriptionBoxService.viewAll().size());
     }
 
