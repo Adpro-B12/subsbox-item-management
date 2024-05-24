@@ -39,19 +39,19 @@ public class SubscriptionBoxController {
     }
 
     @GetMapping("/viewDetails/{boxId}")
-    public ResponseEntity<String> viewDetails(@PathVariable String boxId) {
+    public ResponseEntity<String> viewDetails(@PathVariable Long boxId) {
         String boxName = subscriptionBoxService.viewDetails(boxId);
         return ResponseEntity.ok(boxName);
     }
 
     @DeleteMapping("/delete/{boxId}")
-    public ResponseEntity<SubscriptionBox> deleteBox(@PathVariable String boxId) {
-        SubscriptionBox deletedBox = subscriptionBoxService.deleteBox(boxId);
+    public ResponseEntity<SubscriptionBox> deleteBox(@PathVariable Long long1) {
+        SubscriptionBox deletedBox = subscriptionBoxService.deleteBox(long1);
         return ResponseEntity.ok(deletedBox);
     }
 
     @PutMapping("/edit/{boxId}")
-    public ResponseEntity<SubscriptionBox> editBox(@PathVariable String boxId, @RequestBody SubscriptionBox subscriptionBox) {
+    public ResponseEntity<SubscriptionBox> editBox(@PathVariable Long boxId, @RequestBody SubscriptionBox subscriptionBox) {
         SubscriptionBox editedBox = subscriptionBoxService.editBox(boxId, subscriptionBox);
         return ResponseEntity.ok(editedBox);
     }

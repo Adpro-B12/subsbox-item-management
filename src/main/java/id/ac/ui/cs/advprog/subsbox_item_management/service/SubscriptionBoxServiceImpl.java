@@ -21,14 +21,14 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
     }
 
     @Override
-    public SubscriptionBox deleteBox(String id) {
+    public SubscriptionBox deleteBox(Long id) {
         SubscriptionBox box = subscriptionBoxRepository.findById(id).orElse(null);
         subscriptionBoxRepository.deleteById(id);
         return box;
     }
 
     @Override
-    public SubscriptionBox editBox(String id, SubscriptionBox box) {
+    public SubscriptionBox editBox(Long id, SubscriptionBox box) {
         return subscriptionBoxRepository.findById(id).map(subscriptionBox -> {
             subscriptionBox.setName(box.getName());
             subscriptionBox.setPrice(box.getPrice());
@@ -50,8 +50,8 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
     }
 
     @Override
-    public String viewDetails(String boxId) {
-        return subscriptionBoxRepository.findById(boxId).get().getName();
+    public String viewDetails(Long boxId) {
+        return subscriptionBoxRepository.findById(boxId).map(SubscriptionBox::getName).orElse(null);
     }
 
 
