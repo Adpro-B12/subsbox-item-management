@@ -23,14 +23,14 @@ public class ItemBuilder {
         return item;
     }
 
-    public Item setId(String id) {
+    public Item setId(Long id) {
         item.setId(id);
         return item;
     }
 
-    public Item setBox(SubscriptionBox box){
-        item.setSubscriptionBox(box);
-        return item;
-    }
+//    public Item setBox(SubscriptionBox box){
+//        item.setSubscriptionBox(box);
+//        return item;
+//    }
 
 }

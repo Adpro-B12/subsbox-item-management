@@ -34,7 +34,7 @@ public class SubscriptionBoxBuilder {
         return this;
     }
 
-    public SubscriptionBoxBuilder setId(String id) {
+    public SubscriptionBoxBuilder setId(Long id) {
         subscriptionBox.setId(id);
         return this;
     }
