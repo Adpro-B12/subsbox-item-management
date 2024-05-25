@@ -45,8 +45,7 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
 
     @Override
     public List<SubscriptionBox> filterByPrice(int price) {
-        List<SubscriptionBox> boxes =  subscriptionBoxRepository.findAll().stream().filter(var1 -> {return var1.getPrice()==price;}).collect(Collectors.toList()) ;
-        return boxes;
+        return subscriptionBoxRepository.findAll().stream().filter(var1 -> {return var1.getPrice()==price;}).collect(Collectors.toList()) ;
     }
 
     @Override
