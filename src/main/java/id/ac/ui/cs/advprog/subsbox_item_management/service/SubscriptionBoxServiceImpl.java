@@ -50,14 +50,7 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
     }
 
     @Override
-    public String viewDetails(Long boxId) {
-        return subscriptionBoxRepository.findById(boxId).map(SubscriptionBox::getName).orElse(null);
+    public SubscriptionBox viewDetails(Long boxId) {
+        return subscriptionBoxRepository.findById(boxId).orElse(null);
     }
-
-
-    // need Rating
-    // @Override
-    // public CompletableFuture<List<SubscriptionBox>> getFilteredBoxesByRatingAsync(String name) {
-    //     return CompletableFuture.supplyAsync(() -> subscriptionBoxRepository.findByNameContaining(name));
-    // }
 }

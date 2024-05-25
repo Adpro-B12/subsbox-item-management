@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.model.builder;
 
-import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 import org.springframework.stereotype.Component;
 
 import id.ac.ui.cs.advprog.subsbox_item_management.model.Item;
@@ -27,10 +26,5 @@ public class ItemBuilder {
         item.setId(id);
         return item;
     }
-
-//    public Item setBox(SubscriptionBox box){
-//        item.setSubscriptionBox(box);
-//        return item;
-//    }
 
 }
