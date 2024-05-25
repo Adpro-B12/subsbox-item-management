@@ -1,7 +1,6 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +44,9 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
 
     @Override
     public List<SubscriptionBox> filterByPrice(int price) {
-        return subscriptionBoxRepository.findAll().stream().filter(var1 -> {return var1.getPrice()==price;}).collect(Collectors.toList()) ;
+        return subscriptionBoxRepository.findAll().stream()
+                .filter(var1 -> var1.getPrice() == price)
+                .toList();
     }
 
     @Override
