@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 import id.ac.ui.cs.advprog.subsbox_item_management.service.SubscriptionBoxService;
-import io.micrometer.core.ipc.http.HttpSender.Response;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,19 +14,16 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -45,7 +41,7 @@ public class SubscriptionBoxControllerTest {
    @Mock
    private Model model;
 
-   private ObjectMapper objectMapper = new ObjectMapper();
+   private final ObjectMapper objectMapper = new ObjectMapper();
 
    @BeforeEach
    public void setUp() {
@@ -59,7 +55,6 @@ public class SubscriptionBoxControllerTest {
        subscriptionBox.setId(generateRandomLong());
        subscriptionBox.setName("Test Subscription Box");
        subscriptionBox.setPrice(100000);
-       // subscriptionBox.setRating(5);
 
        given(subscriptionBoxService.addBox(any(SubscriptionBox.class))).willReturn(subscriptionBox);
 
@@ -79,7 +74,6 @@ public class SubscriptionBoxControllerTest {
        subscriptionBox.setId(id);
        subscriptionBox.setName("Test Subscription Box");
        subscriptionBox.setPrice(100000);
-       // subscriptionBox.setRating(5);
 
        given(subscriptionBoxService.editBox(any(Long.class),any(SubscriptionBox.class))).willReturn(subscriptionBox);
 
@@ -98,7 +92,6 @@ public class SubscriptionBoxControllerTest {
        subscriptionBox.setId(generateRandomLong());
        subscriptionBox.setName("Test Subscription Box");
        subscriptionBox.setPrice(100000);
-       // subscriptionBox.setRating(5);
 
        ResponseEntity<SubscriptionBox> response = subscriptionBoxController.deleteBox(subscriptionBox.getId());
 
@@ -109,16 +102,17 @@ public class SubscriptionBoxControllerTest {
    @Test
    public void testViewSubscriptionBox() throws Exception {
        SubscriptionBox subscriptionBox = new SubscriptionBox();
-       subscriptionBox.setId(1l);
+       subscriptionBox.setId(1L);
        subscriptionBox.setName("Test Subscription Box");
        subscriptionBox.setPrice(100000);
-       // subscriptionBox.setRating(5);
 
-       given(subscriptionBoxService.viewDetails(1L)).willReturn(subscriptionBox.getName());
+       given(subscriptionBoxService.viewDetails(1L)).willReturn(subscriptionBox);
 
        mockMvc.perform(get("/subscription-box/viewDetails/1"))
-               .andExpect(status().isOk())
-               .andExpect(jsonPath("$").value(subscriptionBox.getName()));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(subscriptionBox.getId()))
+                .andExpect(jsonPath("$.name").value(subscriptionBox.getName()))
+                .andExpect(jsonPath("$.price").value(subscriptionBox.getPrice()));
    }
 
    @Test
@@ -128,16 +122,15 @@ public class SubscriptionBoxControllerTest {
        subscriptionBox.setId(generateRandomLong());
        subscriptionBox.setName("Test Subscription Box");
        subscriptionBox.setPrice(100000);
-       // subscriptionBox.setRating(5);
        subscriptionBoxes.add(subscriptionBox);
 
        given(subscriptionBoxService.viewAll()).willReturn(subscriptionBoxes);
 
        mockMvc.perform(get("/subscription-box/viewAll"))
-               .andExpect(status().isOk())
-               .andExpect(jsonPath("$[0].id").value(subscriptionBox.getId()))
-               .andExpect(jsonPath("$[0].name").value(subscriptionBox.getName()))
-               .andExpect(jsonPath("$[0].price").value(subscriptionBox.getPrice()));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(subscriptionBox.getId()))
+                .andExpect(jsonPath("$[0].name").value(subscriptionBox.getName()))
+                .andExpect(jsonPath("$[0].price").value(subscriptionBox.getPrice()));
    }
 
    @Test
@@ -146,13 +139,6 @@ public class SubscriptionBoxControllerTest {
                .andExpect(status().isOk())
                .andExpect(jsonPath("$").isArray());
    }
-
-   // @Test
-   // public void testFilterByRating() throws Exception {
-   //     mockMvc.perform(get("/subscription-box/filterByRating/5"))
-   //             .andExpect(status().isOk())
-   //             .andExpect(view().name("viewHTML"));
-   // }
 
    public Long generateRandomLong() {
        return (long) (Math.random() * 1000);

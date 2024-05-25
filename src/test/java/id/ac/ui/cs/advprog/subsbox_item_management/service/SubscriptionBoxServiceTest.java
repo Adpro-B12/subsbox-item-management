@@ -29,7 +29,7 @@ public class SubscriptionBoxServiceTest {
    @BeforeEach
    public void setUp() {
        SubscriptionBox box1 = new SubscriptionBox();
-       box1.setId(1L); // Change the argument to a long value
+       box1.setId(1L);
        box1.setName("Box 1");
        box1.setPrice(100000);
        box1.setType("MTH");
@@ -39,7 +39,7 @@ public class SubscriptionBoxServiceTest {
    @Test
    public void testAddBox() {
        SubscriptionBox box2 = new SubscriptionBox();
-       box2.setId(2L); // Change the argument to a long value
+       box2.setId(2L);
        box2.setName("Box 2");
        box2.setPrice(200000);
        box2.setType("MTH");
@@ -54,21 +54,21 @@ public class SubscriptionBoxServiceTest {
    @Test
    public void testEditBox() {
        SubscriptionBox box = new SubscriptionBox();
-       box.setId(1L); // Change the argument to a long value
+       box.setId(1L);
        box.setName("Box 1");
        box.setPrice(100000);
        box.setType("MTH");
 
        SubscriptionBox updatedBox = new SubscriptionBox();
-       updatedBox.setId(1L); // Change the argument to a long value
+       updatedBox.setId(1L);
        updatedBox.setName("Updated Box 1");
        updatedBox.setPrice(150000);
        updatedBox.setType("SAA");
 
-       when(subscriptionBoxRepository.findById(1L)).thenReturn(Optional.of(box)); // Change the argument to a long value
+       when(subscriptionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
        when(subscriptionBoxRepository.save(box)).thenReturn(updatedBox);
 
-       SubscriptionBox result = subscriptionBoxService.editBox(1L, updatedBox); // Change the argument to a long value
+       SubscriptionBox result = subscriptionBoxService.editBox(1L, updatedBox);
 
        assertEquals("Updated Box 1", result.getName());
        assertEquals(150000, result.getPrice());
@@ -79,20 +79,20 @@ public class SubscriptionBoxServiceTest {
    @Test
    public void testDeleteBox() {
        SubscriptionBox box1 = new SubscriptionBox();
-       box1.setId(1L); // Change the argument to a long value
+       box1.setId(1L);
        box1.setName("Box 1");
        box1.setPrice(100000);
        box1.setType("MTH");
 
-       doNothing().when(subscriptionBoxRepository).deleteById(1L); // Change the argument to a long value
-       subscriptionBoxService.deleteBox(1L); // Change the argument to a long value
+       doNothing().when(subscriptionBoxRepository).deleteById(1L);
+       subscriptionBoxService.deleteBox(1L);
        assertEquals(0, subscriptionBoxService.viewAll().size());
    }
 
    @Test
    public void testViewAll() {
        SubscriptionBox box1 = new SubscriptionBox();
-       box1.setId(1L); // Change the argument to a long value
+       box1.setId(1L);
        box1.setName("Box 1");
        box1.setPrice(100000);
        box1.setType("MTH");
@@ -104,13 +104,13 @@ public class SubscriptionBoxServiceTest {
    @Test
    public void testViewDetails() {
        SubscriptionBox box = new SubscriptionBox();
-       box.setId(1L); // Change the argument to a long value
+       box.setId(1L);
        box.setName("Box 1");
        box.setPrice(100000);
        box.setType("MTH");
 
-       when(subscriptionBoxRepository.findById(1L)).thenReturn(java.util.Optional.of(box)); // Change the argument to a long value
-       assertEquals("Box 1", subscriptionBoxService.viewDetails(1L)); // Change the argument to a long value
+       when(subscriptionBoxRepository.findById(1L)).thenReturn(java.util.Optional.of(box));
+       assertEquals(box, subscriptionBoxService.viewDetails(1L));
    }
 
    @Test

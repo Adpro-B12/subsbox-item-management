@@ -1,9 +1,7 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
@@ -24,7 +22,6 @@ import id.ac.ui.cs.advprog.subsbox_item_management.model.Item;
 import id.ac.ui.cs.advprog.subsbox_item_management.service.ItemService;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
