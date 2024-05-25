@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/subscription-box")
 public class SubscriptionBoxController {
+    
     @Autowired
     private SubscriptionBoxService subscriptionBoxService;
     String createHTML = "userCreate";
@@ -39,19 +40,19 @@ public class SubscriptionBoxController {
     }
 
     @GetMapping("/viewDetails/{boxId}")
-    public ResponseEntity<String> viewDetails(@PathVariable String boxId) {
-        String boxName = subscriptionBoxService.viewDetails(boxId);
-        return ResponseEntity.ok(boxName);
+    public ResponseEntity<SubscriptionBox> viewDetails(@PathVariable Long boxId) {
+        SubscriptionBox box = subscriptionBoxService.viewDetails(boxId);
+        return ResponseEntity.ok(box);
     }
 
     @DeleteMapping("/delete/{boxId}")
-    public ResponseEntity<SubscriptionBox> deleteBox(@PathVariable String boxId) {
+    public ResponseEntity<SubscriptionBox> deleteBox(@PathVariable Long boxId) {
         SubscriptionBox deletedBox = subscriptionBoxService.deleteBox(boxId);
         return ResponseEntity.ok(deletedBox);
     }
 
     @PutMapping("/edit/{boxId}")
-    public ResponseEntity<SubscriptionBox> editBox(@PathVariable String boxId, @RequestBody SubscriptionBox subscriptionBox) {
+    public ResponseEntity<SubscriptionBox> editBox(@PathVariable Long boxId, @RequestBody SubscriptionBox subscriptionBox) {
         SubscriptionBox editedBox = subscriptionBoxService.editBox(boxId, subscriptionBox);
         return ResponseEntity.ok(editedBox);
     }
@@ -61,12 +62,4 @@ public class SubscriptionBoxController {
         List<SubscriptionBox> filteredBoxes = subscriptionBoxService.filterByPrice(price);
         return ResponseEntity.ok(filteredBoxes);
     }
-    // di rest cuman bisa return json. kalo mau return html, mesti pake modelview
-    
-
-    
-    // @GetMapping("/filterByRating/{rating}")
-    // public String filterByRating(@PathVariable int rating, Model model) {
-    //     return "viewHTML";
-    // }
 }

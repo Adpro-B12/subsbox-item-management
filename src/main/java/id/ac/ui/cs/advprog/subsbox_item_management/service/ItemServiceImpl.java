@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+
     @Autowired
     private ItemRepository itemRepository;
 
@@ -23,13 +24,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item getItemById(String itemId) {
-        return itemRepository.findById(itemId).orElse(null);
+    public Item getItemById(Long id) {
+        return itemRepository.findById(id).orElse(null);
 
     }
 
     @Override
-    public Item editItem(Item item, String id) {
+    public Item editItem(Item item, Long id) {
         return itemRepository.findById(id).map(updatedItem -> {
             updatedItem.setName(item.getName());
             updatedItem.setQuantity(item.getQuantity());

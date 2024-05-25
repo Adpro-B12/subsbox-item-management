@@ -6,10 +6,9 @@ import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 
 public interface SubscriptionBoxService {
     public SubscriptionBox addBox(SubscriptionBox subscriptionBox);
-    public SubscriptionBox editBox(String id, SubscriptionBox subscriptionBox);
-    public SubscriptionBox deleteBox(String id);
+    public SubscriptionBox editBox(Long boxId, SubscriptionBox subscriptionBox);
+    public SubscriptionBox deleteBox(Long boxId);
     public List<SubscriptionBox> viewAll();
-    public String viewDetails(String boxId);
+    public SubscriptionBox viewDetails(Long boxId);
     public List<SubscriptionBox> filterByPrice(int price);
-    // public List<SubscriptionBox> filterByRating(int rating); 
 }
