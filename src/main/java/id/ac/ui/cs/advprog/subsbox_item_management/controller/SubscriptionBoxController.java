@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/subscription-box")
 public class SubscriptionBoxController {
+    
     @Autowired
     private SubscriptionBoxService subscriptionBoxService;
     String createHTML = "userCreate";
@@ -61,12 +62,4 @@ public class SubscriptionBoxController {
         List<SubscriptionBox> filteredBoxes = subscriptionBoxService.filterByPrice(price);
         return ResponseEntity.ok(filteredBoxes);
     }
-    // di rest cuman bisa return json. kalo mau return html, mesti pake modelview
-    
-
-    
-    // @GetMapping("/filterByRating/{rating}")
-    // public String filterByRating(@PathVariable int rating, Model model) {
-    //     return "viewHTML";
-    // }
 }
