@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
-public class SubscriptionBoxControllerTest {
+class SubscriptionBoxControllerTest {
 
    private MockMvc mockMvc;
 
@@ -44,13 +44,13 @@ public class SubscriptionBoxControllerTest {
    private final ObjectMapper objectMapper = new ObjectMapper();
 
    @BeforeEach
-   public void setUp() {
+    void setUp() {
        MockitoAnnotations.initMocks(this);
        mockMvc = MockMvcBuilders.standaloneSetup(subscriptionBoxController).build();
    }
 
    @Test
-   public void testCreateSubscriptionBox() throws Exception {
+    void testCreateSubscriptionBox() throws Exception {
        SubscriptionBox subscriptionBox = new SubscriptionBox();
        subscriptionBox.setId(generateRandomLong());
        subscriptionBox.setName("Test Subscription Box");
@@ -68,7 +68,7 @@ public class SubscriptionBoxControllerTest {
    }
 
    @Test    
-   public void testEditSubscriptionBox() throws Exception {
+    void testEditSubscriptionBox() throws Exception {
        SubscriptionBox subscriptionBox = new SubscriptionBox();
        long id = 1L;
        subscriptionBox.setId(id);
@@ -87,7 +87,7 @@ public class SubscriptionBoxControllerTest {
    }
 
    @Test
-   public void testDeleteSubscriptionBox() throws Exception {
+    void testDeleteSubscriptionBox() throws Exception {
        SubscriptionBox subscriptionBox = new SubscriptionBox();
        subscriptionBox.setId(generateRandomLong());
        subscriptionBox.setName("Test Subscription Box");
@@ -100,7 +100,7 @@ public class SubscriptionBoxControllerTest {
    }
 
    @Test
-   public void testViewSubscriptionBox() throws Exception {
+    void testViewSubscriptionBox() throws Exception {
        SubscriptionBox subscriptionBox = new SubscriptionBox();
        subscriptionBox.setId(1L);
        subscriptionBox.setName("Test Subscription Box");
@@ -116,7 +116,7 @@ public class SubscriptionBoxControllerTest {
    }
 
    @Test
-   public void testViewAllSubscriptionBox() throws Exception {
+    void testViewAllSubscriptionBox() throws Exception {
        List<SubscriptionBox> subscriptionBoxes = new ArrayList<>();
        SubscriptionBox subscriptionBox = new SubscriptionBox();
        subscriptionBox.setId(generateRandomLong());
@@ -134,7 +134,7 @@ public class SubscriptionBoxControllerTest {
    }
 
    @Test
-    public void testGetFilteredSubscriptionBoxesByPrice() throws Exception {
+        void testGetFilteredSubscriptionBoxesByPrice() throws Exception {
          mockMvc.perform(get("/subscription-box/price")
                 .param("minPrice", "100000")
                 .param("maxPrice", "200000"))
@@ -143,14 +143,14 @@ public class SubscriptionBoxControllerTest {
     }
 
     @Test
-    public void testGetFilteredSubscriptionBoxesByName() throws Exception {
+        void testGetFilteredSubscriptionBoxesByName() throws Exception {
         mockMvc.perform(get("/subscription-box/name")
                 .param("name", "Test Subscription Box"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray());
     }
 
-   public Long generateRandomLong() {
+    Long generateRandomLong() {
        return (long) (Math.random() * 1000);
    }
 }

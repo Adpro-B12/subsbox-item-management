@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class ItemServiceTest {
+class ItemServiceTest {
 
    @InjectMocks
    private ItemServiceImpl itemService;
@@ -25,12 +25,12 @@ public class ItemServiceTest {
    private ItemRepository itemRepository;
 
    @BeforeEach
-   public void setUp() {
+    void setUp() {
 
    }
 
    @Test
-   public void testCreateItem() {
+    void testCreateItem() {
        Item item = new Item();
        item.setId(1L);
        item.setName("Item 1");
@@ -42,7 +42,7 @@ public class ItemServiceTest {
    }
 
    @Test
-   public void testGetAllItems() {
+    void testGetAllItems() {
        List<Item> items = new ArrayList<>();
        Item item1 = new Item();
        item1.setId(1L);
@@ -62,7 +62,7 @@ public class ItemServiceTest {
    }
 
    @Test
-   public void testGetItemById() {
+    void testGetItemById() {
        Item item = new Item();
        item.setId(1L);
        item.setName("Item 1");
@@ -74,7 +74,7 @@ public class ItemServiceTest {
    }
 
    @Test
-   public void testEditItem() {
+    void testEditItem() {
         Item item = new Item();
         item.setId(1L);
         item.setName("Item 1");
@@ -87,7 +87,7 @@ public class ItemServiceTest {
    }
 
    @Test
-   public void testDeleteItem() {
+    void testDeleteItem() {
        Item item = new Item();
        item.setId(1L);
        item.setName("Item 1");

@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @ExtendWith(MockitoExtension.class)
-public class ItemControllerTest {
+class ItemControllerTest {
 
         private MockMvc mockMvc;
 
@@ -40,13 +40,13 @@ public class ItemControllerTest {
         private ObjectMapper objectMapper = new ObjectMapper();
 
         @BeforeEach
-        public void setUp() {
+        void setUp() {
             MockitoAnnotations.initMocks(this);
             mockMvc = MockMvcBuilders.standaloneSetup(itemController).build();
         }
 
         @Test
-        public void testCreateItem() throws Exception {
+        void testCreateItem() throws Exception {
             Item item = new Item();
             item.setId(1L);
             item.setName("Test Item");
@@ -65,7 +65,7 @@ public class ItemControllerTest {
 
 
         @Test
-        public void testGetAllItems() throws Exception {
+        void testGetAllItems() throws Exception {
             List<Item> items = new ArrayList<>();
             Item item1 = new Item();
             item1.setId(1L);
@@ -92,7 +92,7 @@ public class ItemControllerTest {
         }
 
         @Test
-        public void testGetItemById() throws Exception {
+        void testGetItemById() throws Exception {
             Item item = new Item();
             item.setId(1L);
             item.setName("Item 1");
@@ -108,7 +108,7 @@ public class ItemControllerTest {
         }
 
         @Test
-        public void testEditItem() throws Exception {
+        void testEditItem() throws Exception {
             Item item = new Item();
             item.setId(1L);
             item.setName("Item 1");
@@ -126,7 +126,7 @@ public class ItemControllerTest {
         }
 
         @Test
-        public void testDeleteItem() throws Exception {
+        void testDeleteItem() throws Exception {
             Item item = new Item();
             item.setId(1L);
             item.setName("Item 1");

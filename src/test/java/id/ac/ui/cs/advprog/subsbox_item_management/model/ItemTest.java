@@ -3,24 +3,24 @@ package id.ac.ui.cs.advprog.subsbox_item_management.model;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ItemTest {
+class ItemTest {
 
    @Test
-   public void testItemId() {
+    void testItemId() {
        Item item = new Item();
        item.setId(1L);
        assertEquals(1L, item.getId());
    }
 
    @Test
-   public void testItemName() {
+    void testItemName() {
        Item item = new Item();
        item.setName("Test Item");
        assertEquals("Test Item", item.getName());
    }
 
    @Test
-   public void testItemQuantity() {
+    void testItemQuantity() {
        Item item = new Item();
        item.setQuantity(10);
        assertEquals(10, item.getQuantity());

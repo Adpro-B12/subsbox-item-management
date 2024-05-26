@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-public class SubscriptionBoxTest {
+class SubscriptionBoxTest {
     List<Item> items;
     SubscriptionBox subscriptionBox;
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         this.subscriptionBox = new SubscriptionBox();
         this.subscriptionBox.setId(5L);
         this.subscriptionBox.setName("BOX1");
@@ -19,27 +19,27 @@ public class SubscriptionBoxTest {
     }
 
     @Test
-    public void testGetId() {
+    void testGetId() {
         assertEquals(5L, subscriptionBox.getId());
     }
 
     @Test
-    public void testGetName() {
+    void testGetName() {
         assertEquals("BOX1", subscriptionBox.getName());
     }
 
     @Test
-    public void testGetType() {
+    void testGetType() {
         assertEquals("MTH", subscriptionBox.getType());
     }
 
     @Test
-    public void testGetPrice() {
+    void testGetPrice() {
         assertEquals(100000, subscriptionBox.getPrice());
     }
 
 
-    public Long generateRandomLong() {
+    Long generateRandomLong() {
         return (long) (Math.random() * 1000);
     }
 }

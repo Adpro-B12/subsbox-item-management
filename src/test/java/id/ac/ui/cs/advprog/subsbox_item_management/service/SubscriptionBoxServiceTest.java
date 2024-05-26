@@ -18,7 +18,7 @@ import id.ac.ui.cs.advprog.subsbox_item_management.model.SubscriptionBox;
 import id.ac.ui.cs.advprog.subsbox_item_management.repository.SubscriptionBoxRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class SubscriptionBoxServiceTest {
+class SubscriptionBoxServiceTest {
 
    @InjectMocks
    private SubscriptionBoxServiceImpl subscriptionBoxService;
