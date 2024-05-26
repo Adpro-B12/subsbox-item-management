@@ -27,7 +27,7 @@ class SubscriptionBoxServiceTest {
    private SubscriptionBoxRepository subscriptionBoxRepository;
 
    @BeforeEach
-   public void setUp() {
+        void setUp() {
        SubscriptionBox box1 = new SubscriptionBox();
        box1.setId(1L);
        box1.setName("Box 1");
@@ -37,7 +37,7 @@ class SubscriptionBoxServiceTest {
    }
 
    @Test
-   public void testAddBox() {
+        void testAddBox() {
        SubscriptionBox box2 = new SubscriptionBox();
        box2.setId(2L);
        box2.setName("Box 2");
@@ -52,7 +52,7 @@ class SubscriptionBoxServiceTest {
    }
 
    @Test
-   public void testEditBox() {
+        void testEditBox() {
        SubscriptionBox box = new SubscriptionBox();
        box.setId(1L);
        box.setName("Box 1");
@@ -77,7 +77,7 @@ class SubscriptionBoxServiceTest {
    }
 
    @Test
-   public void testDeleteBox() {
+        void testDeleteBox() {
        SubscriptionBox box1 = new SubscriptionBox();
        box1.setId(1L);
        box1.setName("Box 1");
@@ -90,7 +90,7 @@ class SubscriptionBoxServiceTest {
    }
 
    @Test
-   public void testViewAll() {
+        void testViewAll() {
        SubscriptionBox box1 = new SubscriptionBox();
        box1.setId(1L);
        box1.setName("Box 1");
@@ -102,7 +102,7 @@ class SubscriptionBoxServiceTest {
    }
 
    @Test
-   public void testViewDetails() {
+        void testViewDetails() {
        SubscriptionBox box = new SubscriptionBox();
        box.setId(1L);
        box.setName("Box 1");
@@ -114,7 +114,7 @@ class SubscriptionBoxServiceTest {
    }
 
    @Test
-   public void testFilterByPrice() {
+        void testFilterByPrice() {
        SubscriptionBox box1 = new SubscriptionBox();
        box1.setId(1L);
        box1.setName("Box 1");
@@ -133,7 +133,7 @@ class SubscriptionBoxServiceTest {
    }
 
     @Test
-    public void testGetFilteredBoxesByPrice() {
+            void testGetFilteredBoxesByPrice() {
         SubscriptionBox box1 = new SubscriptionBox();
         box1.setId(1L);
         box1.setName("Box 1");
@@ -152,7 +152,7 @@ class SubscriptionBoxServiceTest {
     }
 
     @Test
-    public void testGetFilteredBoxesByName() {
+            void testGetFilteredBoxesByName() {
         SubscriptionBox box1 = new SubscriptionBox();
         box1.setId(1L);
         box1.setName("Box 1");

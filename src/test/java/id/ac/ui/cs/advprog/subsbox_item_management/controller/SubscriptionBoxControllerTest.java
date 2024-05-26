@@ -95,7 +95,7 @@ class SubscriptionBoxControllerTest {
 
        ResponseEntity<SubscriptionBox> response = subscriptionBoxController.deleteBox(subscriptionBox.getId());
 
-       assertEquals(response.getStatusCodeValue(), 200);
+       assertEquals(200,response.getStatusCodeValue() );
 
    }
 
