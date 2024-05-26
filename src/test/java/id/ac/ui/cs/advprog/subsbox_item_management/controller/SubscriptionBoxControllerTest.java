@@ -124,9 +124,9 @@ public class SubscriptionBoxControllerTest {
        subscriptionBox.setPrice(100000);
        subscriptionBoxes.add(subscriptionBox);
 
-       given(subscriptionBoxService.viewAll()).willReturn(subscriptionBoxes);
+       given(subscriptionBoxService.getAllBoxes()).willReturn(subscriptionBoxes);
 
-       mockMvc.perform(get("/subscription-box/viewAll"))
+       mockMvc.perform(get("/subscription-box/getAll"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(subscriptionBox.getId()))
                 .andExpect(jsonPath("$[0].name").value(subscriptionBox.getName()))
@@ -134,11 +134,21 @@ public class SubscriptionBoxControllerTest {
    }
 
    @Test
-   public void testFilterByPrice() throws Exception {
-       mockMvc.perform(get("/subscription-box/filterByPrice/100000"))
-               .andExpect(status().isOk())
-               .andExpect(jsonPath("$").isArray());
-   }
+    public void testGetFilteredSubscriptionBoxesByPrice() throws Exception {
+         mockMvc.perform(get("/subscription-box/price")
+                .param("minPrice", "100000")
+                .param("maxPrice", "200000"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+    }
+
+    @Test
+    public void testGetFilteredSubscriptionBoxesByName() throws Exception {
+        mockMvc.perform(get("/subscription-box/name")
+                .param("name", "Test Subscription Box"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+    }
 
    public Long generateRandomLong() {
        return (long) (Math.random() * 1000);

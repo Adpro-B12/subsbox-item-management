@@ -48,7 +48,7 @@ public class SubscriptionBoxServiceTest {
        subscriptionBoxService.addBox(box2);
 
        when(subscriptionBoxRepository.findAll()).thenReturn(List.of(box2, box2));
-       assertEquals(2, subscriptionBoxService.viewAll().size());
+       assertEquals(2, subscriptionBoxService.getAllBoxes().size());
    }
 
    @Test
@@ -86,7 +86,7 @@ public class SubscriptionBoxServiceTest {
 
        doNothing().when(subscriptionBoxRepository).deleteById(1L);
        subscriptionBoxService.deleteBox(1L);
-       assertEquals(0, subscriptionBoxService.viewAll().size());
+       assertEquals(0, subscriptionBoxService.getAllBoxes().size());
    }
 
    @Test
@@ -98,7 +98,7 @@ public class SubscriptionBoxServiceTest {
        box1.setType("MTH");
 
        when(subscriptionBoxRepository.findAll()).thenReturn(List.of(box1));
-       assertEquals(1, subscriptionBoxService.viewAll().size());
+       assertEquals(1, subscriptionBoxService.getAllBoxes().size());
    }
 
    @Test
@@ -131,4 +131,42 @@ public class SubscriptionBoxServiceTest {
        List<SubscriptionBox> boxes = subscriptionBoxService.filterByPrice(100000);
        assertEquals(1, boxes.size());
    }
+
+    @Test
+    public void testGetFilteredBoxesByPrice() {
+        SubscriptionBox box1 = new SubscriptionBox();
+        box1.setId(1L);
+        box1.setName("Box 1");
+        box1.setPrice(100000);
+        box1.setType("MTH");
+
+        SubscriptionBox box2 = new SubscriptionBox();
+        box2.setId(2L);
+        box2.setName("Box 2");
+        box2.setPrice(200000);
+        box2.setType("MTH");
+
+        when(subscriptionBoxRepository.findByPriceBetween(100000, 200000)).thenReturn(List.of(box1, box2));
+        List<SubscriptionBox> boxes = subscriptionBoxService.getFilteredBoxesByPrice(100000, 200000);
+        assertEquals(2, boxes.size());
+    }
+
+    @Test
+    public void testGetFilteredBoxesByName() {
+        SubscriptionBox box1 = new SubscriptionBox();
+        box1.setId(1L);
+        box1.setName("Box 1");
+        box1.setPrice(100000);
+        box1.setType("MTH");
+
+        SubscriptionBox box2 = new SubscriptionBox();
+        box2.setId(2L);
+        box2.setName("Box 2");
+        box2.setPrice(200000);
+        box2.setType("MTH");
+
+        when(subscriptionBoxRepository.findByNameContaining("Box 1")).thenReturn(List.of(box1));
+        List<SubscriptionBox> boxes = subscriptionBoxService.getFilteredBoxesByName("Box 1");
+        assertEquals(1, boxes.size());
+    }
 }
