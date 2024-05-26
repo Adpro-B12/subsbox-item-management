@@ -21,11 +21,6 @@ public class SubscriptionBoxController {
     public String createUserPage(Model model) {
         return "<h1>Subscription box and Item Management sudah berhasil!</h1>";
     }
-    
-    @GetMapping("/create")
-    public String createBoxPage(Model model) {
-        return createHTML;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<SubscriptionBox> createSubscriptionBox(@RequestBody SubscriptionBox subscriptionBox, Model model) {
