@@ -1,6 +1,8 @@
 package id.ac.ui.cs.advprog.subsbox_item_management.service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,11 +40,6 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
     }
 
     @Override
-    public List<SubscriptionBox> viewAll() {
-        return subscriptionBoxRepository.findAll();
-    }
-
-    @Override
     public List<SubscriptionBox> filterByPrice(int price) {
         return subscriptionBoxRepository.findAll().stream()
                 .filter(var1 -> var1.getPrice() == price)
@@ -56,12 +53,18 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
 
     @Override
     public List<SubscriptionBox> getFilteredBoxesByPrice(int minPrice, int maxPrice) {
-        return subscriptionBoxRepository.findByPriceBetween(minPrice, maxPrice);
+        return subscriptionBoxRepository.findByPriceBetween(minPrice, maxPrice)
+                .stream()
+                .sorted(Comparator.comparing(SubscriptionBox::getId))
+                .toList();
+        
     }
 
     @Override
     public List<SubscriptionBox> getFilteredBoxesByName(String name) {
-        return subscriptionBoxRepository.findByNameContaining(name);
+        return subscriptionBoxRepository.findByNameContaining(name).stream()
+        .sorted(Comparator.comparing(SubscriptionBox::getId))
+        .collect(Collectors.toList());
     }
 
     @Override
@@ -72,6 +75,4 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
     public List<SubscriptionBox> getAllBoxes() {
         return subscriptionBoxRepository.findAll();
     }
-
-
 }

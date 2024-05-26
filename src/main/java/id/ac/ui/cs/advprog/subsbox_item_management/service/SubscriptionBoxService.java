@@ -8,7 +8,6 @@ public interface SubscriptionBoxService {
     public SubscriptionBox addBox(SubscriptionBox subscriptionBox);
     public SubscriptionBox editBox(Long boxId, SubscriptionBox subscriptionBox);
     public SubscriptionBox deleteBox(Long boxId);
-    public List<SubscriptionBox> viewAll();
     public SubscriptionBox viewDetails(Long boxId);
     public List<SubscriptionBox> filterByPrice(int price);
     public List<SubscriptionBox> getAllBoxes();
