@@ -11,4 +11,8 @@ public interface SubscriptionBoxService {
     public List<SubscriptionBox> viewAll();
     public SubscriptionBox viewDetails(Long boxId);
     public List<SubscriptionBox> filterByPrice(int price);
+    public List<SubscriptionBox> getAllBoxes();
+    public List<SubscriptionBox> getFilteredBoxesByPrice(int minPrice, int maxPrice);
+    public List<SubscriptionBox> getFilteredBoxesByName(String name);
+    public SubscriptionBox findBoxById(Long id);
 }

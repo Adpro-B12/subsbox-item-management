@@ -53,4 +53,25 @@ public class SubscriptionBoxServiceImpl implements SubscriptionBoxService{
     public SubscriptionBox viewDetails(Long boxId) {
         return subscriptionBoxRepository.findById(boxId).orElse(null);
     }
+
+    @Override
+    public List<SubscriptionBox> getFilteredBoxesByPrice(int minPrice, int maxPrice) {
+        return subscriptionBoxRepository.findByPriceBetween(minPrice, maxPrice);
+    }
+
+    @Override
+    public List<SubscriptionBox> getFilteredBoxesByName(String name) {
+        return subscriptionBoxRepository.findByNameContaining(name);
+    }
+
+    @Override
+    public SubscriptionBox findBoxById(Long id)  {
+        return subscriptionBoxRepository.findById(id).orElse(null);
+    }
+    @Override
+    public List<SubscriptionBox> getAllBoxes() {
+        return subscriptionBoxRepository.findAll();
+    }
+
+
 }
